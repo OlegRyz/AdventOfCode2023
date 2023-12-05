@@ -10,3 +10,6 @@ fun String.digits(usewords: Boolean = false,
         null
     }
 }.filterNotNull()
+
+
+fun String.integers() = this.split(regex = Regex("\\D")).mapNotNull { it.toIntOrNull() }

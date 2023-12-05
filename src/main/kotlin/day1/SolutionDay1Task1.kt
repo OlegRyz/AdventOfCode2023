@@ -5,7 +5,7 @@ import java.io.File
 
 class SolutionDay1Task1 {
     fun solve(path: String): Int {
-        val lines = File(path).readLines()
+        val lines = File("./src/main/kotlin/day1/$path").readLines()
 //        lines.forEach {
 //            println(it)
 //        }
