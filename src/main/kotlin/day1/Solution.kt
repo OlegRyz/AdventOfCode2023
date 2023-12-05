@@ -8,7 +8,10 @@ class SolutionDay1Task1 {
         lines.forEach {
             println(it)
         }
-        return 0
+        val result = lines.sumOf {
+            ("" + it.first { it.isDigit() } + it.last{it.isDigit()}).toInt()
+        }
+        return result
     }
 
 }
