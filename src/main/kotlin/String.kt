@@ -12,6 +12,7 @@ fun String.digits(usewords: Boolean = false,
 }.filterNotNull()
 
 
-fun String.integers() = this.split(regex = Regex("\\D")).mapNotNull { it.toIntOrNull() }
+fun String.integers() = integersIndexed().map{ it.first }.toList()
+fun String.integersIndexed() = Regex("[+-]?\\d+").findAll(this).map { it.value.toLong() to it.range}.toList()
 
 fun String.tokens() = this.split(" ", ";", ",").filter { it.isNotBlank() }

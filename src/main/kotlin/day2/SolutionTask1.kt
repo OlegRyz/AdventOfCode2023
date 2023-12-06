@@ -26,7 +26,7 @@ class SolutionTask1 {
             }) {
             0
         } else {
-            line.integers().first()
+            line.integers().first().toInt()
         }
 
     }

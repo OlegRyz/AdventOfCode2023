@@ -1,6 +1,5 @@
 package day6
 
-import digits
 import integers
 import multiply
 import java.io.File
@@ -20,7 +19,7 @@ class SolutionTask1 {
         return records.multiply()
     }
 
-    fun playGame(time: Int, dist: Int) = (0..time)
+    fun playGame(time: Long, dist: Long) = (0..time)
         .map { holdTime -> (time - holdTime) * holdTime }
         .count { it > dist }
     }
