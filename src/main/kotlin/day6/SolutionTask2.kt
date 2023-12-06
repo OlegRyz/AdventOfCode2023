@@ -19,8 +19,7 @@ class SolutionTask2 {
     }
 
     fun playGame(time: Long, dist: Long) = (0..time)
-        .map { holdTime -> (time - holdTime) * holdTime }
-        .count { it > dist }
+        .count { holdTime -> (time - holdTime) * holdTime > dist }
 }
 
 
