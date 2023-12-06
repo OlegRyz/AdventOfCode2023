@@ -13,3 +13,5 @@ fun String.digits(usewords: Boolean = false,
 
 
 fun String.integers() = this.split(regex = Regex("\\D")).mapNotNull { it.toIntOrNull() }
+
+fun String.tokens() = this.split(" ", ";", ",").filter { it.isNotBlank() }
