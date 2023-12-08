@@ -6,36 +6,32 @@ import java.io.File
 
 class SolutionTask2 {
     fun solve(path: String): Long {
-        val lines = File("./src/main/kotlin/" +
-                "${this::class.java.`package`.name}/$path").readLines()
+        val lines = File(
+            "./src/main/kotlin/" +
+                    "${this::class.java.`package`.name}/$path"
+        ).readLines()
 
         if (lines.isEmpty()) {
             return -1
         }
 
-        val instructions = lines.first().map {
-            when(it) {
-                'L'->0
-                'R'->1
-                else -> null
-            }
-        }.filterNotNull()
+        val instructions = lines.first().map { "LR".indexOf(it) }
 
 
-        val nodes = lines.takeLast(lines.size - 2).map {
-            it.substring(0,3) to Node(it.substring(7,10), it.substring(12,15))
-        }.toMap()
-        return processLine(nodes, instructions)
+        val nodes = lines.takeLast(lines.size - 2).associate {
+            it.substring(0, 3) to Node(it.substring(7, 10), it.substring(12, 15))
+        }
+        return process(nodes, instructions)
     }
 
     data class Node(val left: String, val right: String) {
-        fun next(instruction: Int) = if (instruction == 0) left else right
+        fun doStep(instruction: Int) = listOf(left, right)[instruction]
     }
 
-    private fun processLine(network: Map<String, Node>, instructions: List<Int>): Long {
+    private fun process(network: Map<String, Node>, instructions: List<Int>): Long {
         val startingPoints = network.keys.filter { it.endsWith('A') }
-        val allRoutes = startingPoints.map { loopLength(it, network, instructions) }
-        return allRoutes.leastCommonMultiple()
+        val allLoopLengths = startingPoints.map { loopLength(it, network, instructions) }
+        return allLoopLengths.leastCommonMultiple() //Input data is built that loop length is equal to length from AAA to ZZZ.
     }
 
     private fun loopLength(
@@ -45,8 +41,8 @@ class SolutionTask2 {
     ): Long {
         var current = first
         var i = 0
-        while (!current.endsWith('Z') ) {
-            current = network[current]!!.next(instructions[(i % instructions.size)])
+        while (!current.endsWith('Z')) {
+            current = network[current]!!.doStep(instructions[(i % instructions.size)])
             i++
         }
         return i.toLong()
