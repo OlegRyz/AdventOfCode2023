@@ -1,5 +1,5 @@
-import day3.SolutionTask1
-import day3.SolutionTask2
+import day7.SolutionTask1
+import day7.SolutionTask2
 
 
 fun main(args: Array<String>) {
