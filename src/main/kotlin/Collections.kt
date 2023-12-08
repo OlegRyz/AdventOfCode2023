@@ -14,14 +14,18 @@ fun Sequence<BigInteger>.multiply() = this.reduce { acc, x -> x * acc }
 fun Sequence<Float>.multiply() = this.reduce { acc, x -> x * acc }
 fun Sequence<Double>.multiply() = this.reduce { acc, x -> x * acc }
 
-fun List<String>.addPadding(char: Char): List<String> {
-    val mutable = this.map { "${char}$it${char}" }.toMutableList()
-    val row = buildString(mutable.first().length) {
-        repeat(mutable.first().length) {
-            append(char)
-        }
+fun List<String>.addPadding(char: Char) = addHorizontalPadding(char).addVerticalPadding(char)
+
+fun List<String>.addHorizontalPadding(char: Char) = this.map { "$char$it$char" }
+
+fun List<String>.addVerticalPadding(char: Char) = toMutableList().apply {
+    val paddingRow = buildString(first().length, char)
+    add(0, paddingRow)
+    add(paddingRow)
+}.toList()
+
+fun buildString(length: Int, char: Char) = buildString(length) {
+    repeat(length) {
+        append(char)
     }
-    mutable.add(0, row)
-    mutable.add(row)
-    return mutable.toList()
 }
