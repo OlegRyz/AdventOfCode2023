@@ -4,10 +4,13 @@ import digits
 import integers
 import tokens
 import java.io.File
+import kotlin.io.path.Path
+import kotlin.io.path.readLines
 
 class SolutionTask1 {
     fun solve(path: String): Int {
         val lines = File("./src/main/kotlin/day2/$path").readLines()
+        val lines2 = Path("./src/main/kotlin/day2/$path").readLines()
 //        lines.forEach {
 //            println(it)
 //        }
